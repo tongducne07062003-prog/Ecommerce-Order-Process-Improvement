@@ -169,7 +169,7 @@ Ecommerce-Order-Process-Improvement/
 
 📧 **Email:** [tongducne07062003@gmail.com](mailto:tongducne07062003@gmail.com)  
 💼 **LinkedIn:** [linkedin.com/in/tong-anh-duc](https://linkedin.com/in/tong-anh-duc)  
-🐙 **GitHub:** [github.com/tongducne](https://github.com/tongducne)  
+🐙 **GitHub:** [https://github.com/tongducne07062003-prog](https://github.com/tongducne07062003-prog)  
 📍 Hà Nội, Việt Nam
 
 **Background:**  
