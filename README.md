@@ -191,5 +191,4 @@ MIT License – Tự do sử dụng cho mục đích học tập và xây dựng
 **💬 Câu hỏi? Mở Issue hoặc email trực tiếp.**
 
 Built with ❤️ by Tống Anh Đức | Last Updated: August 2026
-[README.md](https://github.com/user-attachments/files/31446062/README.md)
 
