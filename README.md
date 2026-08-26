@@ -131,7 +131,8 @@ Ecommerce-Order-Process-Improvement/
 - **Figma Prototype** – Màn hình “Theo dõi đơn hàng” cho khách
 - **BRD** – Tài liệu yêu cầu đầy đủ cho Dev & Operations
 
-*(Thêm screenshot Figma và sơ đồ BPMN vào thư mục tương ứng)*
+<img width="2084" height="1476" alt="dashboard_preview" src="https://github.com/user-attachments/assets/523b3209-bd30-46af-a40d-68df3300a020" />
+
 
 ---
 
