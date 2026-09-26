@@ -1,7 +1,7 @@
 # 🛒 Cải tiến Quy trình Order-to-Delivery (E-commerce)
 
 > Dự án Portfolio: Phân tích quy trình nghiệp vụ (Business Process Analysis)  
-> **Tống Anh Đức** | Business Analyst Intern / Junior  
+> **Tống Anh Đức** | Business Analyst Intern 
 > 📧 tongducne07062003@gmail.com  
 > 🔗 LinkedIn: linkedin.com/in/tong-anh-duc | GitHub: github.com/tongducne07062003-prog
 
@@ -9,19 +9,21 @@
 
 ## 📊 Tổng quan dự án
 
-Phân tích và cải tiến quy trình **Order-to-Delivery** của một shop thời trang online, dựa trên **4.200+ đơn hàng** (dữ liệu mô phỏng).
+Phân tích quy trình **Order-to-Delivery** cho bối cảnh shop thời trang online, dựa trên **bộ dữ liệu mô phỏng 400 đơn hàng**.
 
-Xác định điểm nghẽn gây chậm trễ và tỷ lệ hủy đơn cao (11.4%), đề xuất quy trình To-Be, prototype giao diện theo dõi đơn hàng và viết tài liệu yêu cầu (BRD).
+**Mục tiêu:** Tìm chỗ đơn bị chậm / dễ hủy, đề xuất quy trình **To-Be**, đề xuất quy trình To-Be, prototype giao diện theo dõi đơn hàng và viết tài liệu yêu cầu (BRD).
 
-### 🎯 Điểm nổi bật
+### ✨ Điểm nổi bật (từ sample 400 đơn)
 
-| Chỉ số | Giá trị | Ghi chú |
-|--------|---------|---------|
-| 📦 Số đơn phân tích | 4.200+ | Thời trang online |
-| ❌ Tỷ lệ hủy đơn hiện tại | 11.4% | Cao hơn benchmark ngành |
-| ⏱️ Thời gian xử lý TB | Cần cải thiện | Nhiều bước thủ công |
-| 📉 Mục tiêu giảm hủy đơn | < 7% | Sau khi triển khai |
-| 🛠️ Công cụ | Excel, Figma, BPMN | As-Is / To-Be + Prototype |
+| 📌 Chỉ số | 📈 Giá trị | 📝 Ghi chú |
+|-----------|------------|------------|
+| 📦 Số đơn trong sample | **400** | File `sample_order_data.xlsx` |
+| ❌ Tỷ lệ hủy (`is_cancelled`) | **8.0%** (32/400) | Finding từ sample |
+| ⏱️ Thời gian xác nhận TB | **~10.4 giờ** (median **4 giờ**, max **36 giờ**) | Cột `confirm_hours` |
+| 🛒 Kênh hủy cao nhất | **Shopee ~16.3%** | Cao hơn Facebook / Website |
+| 🎯 Mục tiêu hủy (nếu triển khai To-Be) | **< 7%** | Kỳ vọng chiến lược, chưa đo sau go-live |
+| 🛠️ Công cụ | Excel · BPMN · Figma · BRD | As-Is / To-Be + prototype |
+
 
 ---
 
@@ -29,10 +31,10 @@ Xác định điểm nghẽn gây chậm trễ và tỷ lệ hủy đơn cao (11
 
 Shop thời trang online đang gặp các vấn đề:
 
-1. **Quy trình xử lý đơn thủ công nhiều bước** → chậm trễ, sai sót.
-2. **Khách hàng không được cập nhật trạng thái** kịp thời → tăng tỷ lệ hủy và khiếu nại.
-3. **Thiếu tài liệu quy trình chuẩn** → nhân viên mới khó tiếp cận, khó scale.
-4. **Không có metric rõ ràng** để đo lường hiệu quả từng bước.
+1. Quy trình xử lý đơn còn nhiều bước thủ công → chậm, dễ sai sót, khó chuẩn hóa khi đơn tăng.
+2. Khách không được cập nhật trạng thái kịp thời → phải chủ động hỏi CSKH; tăng trải nghiệm xấu và dễ dẫn tới hủy đơn.
+3. Thiếu tài liệu quy trình / requirement chuẩn → nhân viên mới khó tiếp cận, khó bàn giao và khó scale.
+4. Chưa có metric rõ theo từng bước (confirm, đóng gói, bàn giao…) → khó biết đơn đang kẹt ở đâu để ưu tiên sửa.
 
 **Mục tiêu:**
 - Vẽ lại quy trình As-Is  
@@ -42,20 +44,23 @@ Shop thời trang online đang gặp các vấn đề:
 
 ---
 
-## 🛠️ Công cụ & Công nghệ
+## 🛠️ Công cụ & cách làm
 
-| Công cụ | Mục đích |
-|---------|----------|
-| **Excel** | Phân tích dữ liệu đơn hàng, tính KPI |
-| **BPMN** | Vẽ quy trình As-Is / To-Be (draw.io / Lucidchart / Visio) |
-| **Figma** | Prototype giao diện theo dõi đơn hàng |
-| **Word / PowerPoint** | Viết BRD & trình bày đề xuất |
+| 🔧 Công cụ | 💡 Dùng để |
+|------------|------------|
+| **Excel** | Đếm hủy, thời gian confirm, cắt theo status / kênh |
+| **BPMN** (draw.io / tương đương) | Vẽ As-Is và To-Be |
+| **Figma** | Prototype màn “Theo dõi đơn hàng” |
+| **Word / Markdown** | BRD (yêu cầu chức năng & phi chức năng) |
 
-**Kỹ thuật chính:**
-- Lập bản đồ quy trình (As-Is → To-Be)
-- Phân tích nguyên nhân gốc (5 Whys / Fishbone)
-- Thu thập yêu cầu & viết BRD
-- Tư duy UX cho màn hình tracking
+**🔍 Hướng phân tích:**
+
+- 📉 KPI: tỷ lệ hủy, `confirm_hours`, phân bố `status`
+- 🛒 Cắt theo **kênh** (Shopee / TikTok / Facebook / Website)
+- 🧱 Xác định **điểm nghẽn** (chờ xác nhận, đóng gói, thiếu notify)
+- 🗺️ As-Is → To-Be → prototype → BRD
+- ✂️ Tách **finding từ sample** vs **mục tiêu nếu triển khai**
+
 
 ---
 
@@ -74,53 +79,94 @@ Ecommerce-Order-Process-Improvement/
 
 ## 📊 Insight chính
 
-### 1️⃣ Điểm nghẽn chính (từ 4.200+ đơn)
+### 1️⃣ Tỷ lệ hủy và phân bố trạng thái
 
-1. Xác nhận đơn thủ công (chậm 4–12 giờ)
-2. Không có thông báo tự động khi đổi trạng thái
-3. Kho và vận chuyển thiếu đồng bộ
-4. Khách hàng phải chủ động hỏi → tăng tải CSKH
-5. Tỷ lệ hủy cao nhất ở giai đoạn “Chờ xác nhận” và “Đang đóng gói”
+Trên **400** đơn:
 
-### 2️⃣ Tác động
+| 📌 Chỉ số | 📈 Giá trị |
+|-----------|------------|
+| Đơn hủy (`is_cancelled = True`) | **32** |
+| Tỷ lệ hủy | **8.0%** |
 
-- Tỷ lệ hủy **11.4%** (cao hơn mức tốt của ngành ~6–8%)
-- Thời gian trung bình từ đặt hàng đến giao hàng dài hơn mong đợi của khách
-- CSKH phải trả lời nhiều câu hỏi “Đơn tôi đến đâu rồi?”
+**Phân bố `status`:**
 
----
+| Status | Số đơn |
+|--------|--------|
+| Đã giao | 93 |
+| Đã bàn giao VC | 79 |
+| Đang đóng gói | 69 |
+| Đang giao | 52 |
+| Đã xác nhận | 43 |
+| Đã hủy | 32 |
+| Chờ xác nhận | 32 |
 
-## 💡 Đề xuất chiến lược
+💬 **Ý nghĩa:** Vẫn còn lượng đơn ở **Chờ xác nhận** và **Đang đóng gói** — đúng các bước hay phát sinh chậm / thiếu thông tin cho khách. Trên sample, đơn hủy được gắn status **Đã hủy** (32 đơn); phân tích process vẫn ưu tiên các bước trước khi hoàn tất/hủy.
 
-### Ưu tiên 1: Tự động hóa xác nhận & thông báo (0–45 ngày)
-- Tích hợp hệ thống tự động gửi Zalo/SMS khi:
-  - Đơn được xác nhận
-  - Đơn đang đóng gói
-  - Đơn đã bàn giao vận chuyển
-- Giảm thời gian xác nhận từ thủ công xuống < 30 phút.
-
-### Ưu tiên 2: Prototype màn hình Theo dõi đơn (Figma)
-- Khách hàng xem được trạng thái real-time + ước tính giao hàng.
-- Giảm 40–50% ticket CSKH liên quan đến “tracking”.
-
-### Ưu tiên 3: Chuẩn hóa quy trình & đào tạo
-- Tài liệu BRD + SOP mới.
-- Training nhân viên theo quy trình To-Be.
-
-**Ước tính tác động:**
-- Giảm thời gian xử lý đơn trung bình **~35%**
-- Giảm tỷ lệ hủy đơn xuống **dưới 7%**
 
 ---
 
-## 📈 Tác động kỳ vọng
+### 2️⃣ Thời gian xác nhận — tín hiệu nghẽn
 
-| Chỉ số | Hiện tại | Mục tiêu (3–6 tháng) | Cải thiện |
-|--------|----------|----------------------|-----------|
-| Tỷ lệ hủy đơn | 11.4% | < 7% | ↓ ~40% |
-| Thời gian xử lý trung bình | Baseline | -35% | 📈 |
-| Ticket CSKH về tracking | Cao | Giảm 40–50% | 📈 |
-| Độ hài lòng khách hàng | - | Tăng | 📈 |
+| ⏱️ `confirm_hours` | Giá trị |
+|--------------------|---------|
+| Trung bình | **~10.4 giờ** |
+| Trung vị | **4 giờ** |
+| Phần lớn (75%) | ≤ **12 giờ** |
+| Max | **36 giờ** (~1.5 ngày) |
+
+💬 **Ý nghĩa:** Nhiều đơn confirm nhanh (median 4h), nhưng **đuôi chậm tới 36h** kéo trải nghiệm xuống và tăng nguy cơ khách hết kiên nhẫn — khớp đề xuất **tự động hóa confirm + notify**.
+
+---
+
+### 3️⃣ Hủy theo kênh (finding rõ trên sample)
+
+| 🛒 Kênh | Tỷ lệ hủy | Số đơn |
+|---------|----------:|-------:|
+| **Shopee** | **16.3%** | 86 |
+| TikTok | 8.4% | 107 |
+| Website | 4.8% | 104 |
+| Facebook | 3.9% | 103 |
+
+💬 **Ý nghĩa:** **Shopee hủy cao hơn hẳn** các kênh khác trên sample → khi cải tiến process, nên **ưu tiên soi fulfillment / SLA / thông báo** trên kênh này trước (hoặc tách playbook theo kênh).
+
+
+---
+
+
+## 🚀 Đề xuất chiến lược
+
+### 🥇 Ưu tiên 1 — Tự động xác nhận & thông báo (0–45 ngày)
+
+- 📲 Gửi Zalo/SMS (hoặc kênh tương đương) khi: **đã xác nhận**, **đang đóng gói**, **đã bàn giao vận chuyển**
+- ⏱️ Hướng tới rút phần confirm thủ công (mục tiêu vận hành: nhiều đơn về mức **dưới ~30–60 phút** khi hệ thống ổn)
+- Gắn với finding: confirm mean ~10h, max 36h
+
+### 🥈 Ưu tiên 2 — Prototype màn Theo dõi đơn (Figma)
+
+- 👀 Khách xem được trạng thái + ETA cơ bản
+- 🎧 Kỳ vọng minh họa: giảm ticket “đơn tôi đâu rồi?” (hướng **40–50%** nếu triển khai tốt — **target**, chưa đo sau go-live)
+
+### 🥉 Ưu tiên 3 — BRD + SOP + training
+
+- 📄 BRD cho Dev/Ops: chức năng notify, tracking, cập nhật status
+- 📘 SOP To-Be để process không phụ thuộc một người
+
+**Tác động kỳ vọng (minh họa nếu triển khai):**
+
+- Hủy: từ **8.0%** (sample) hướng **< 7%**
+- Thời gian xử lý: hướng cải thiện khoảng **~35%** (target thiết kế To-Be)
+- Ticket tracking: giảm rõ (target vận hành)
+
+---
+
+## 📈 Tác động kỳ vọng (minh họa)
+
+| 📌 Chỉ số | 📊 Hiện trạng (sample) | 🎯 Mục tiêu nếu triển khai | 🏷️ Loại |
+|-----------|------------------------|----------------------------|---------|
+| Tỷ lệ hủy | **8.0%** | **< 7%** | Target chiến lược |
+| Confirm hours (mean / max) | **~10.4h / 36h** | Rút đuôi chậm, tăng đơn confirm nhanh | Finding → action |
+| Hủy kênh Shopee | **~16.3%** | Thu hẹp vs kênh khác | Finding → ưu tiên |
+| Ticket CSKH về tracking | Cao (định tính) | Giảm ~40–50% | Target vận hành |
 
 ---
 
