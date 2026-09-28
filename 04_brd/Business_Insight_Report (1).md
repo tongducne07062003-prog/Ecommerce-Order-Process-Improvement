@@ -23,7 +23,6 @@ Phân tích quy trình Order-to-Delivery trên **bộ dữ liệu mô phỏng 40
 **Hướng xử lý:** To-Be ưu tiên **auto confirm + thông báo trạng thái**, màn **tracking**, và **BRD/SOP**.  
 Mục tiêu hủy **&lt; 7%** và cải thiện thời gian ~**35%** là **kỳ vọng thiết kế**, chưa đo sau go-live.
 
-> Data mô phỏng cho portfolio — không phải đơn production của shop thật.
 
 ---
 
